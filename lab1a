@@ -1,0 +1,41 @@
+#include<GL/glut.h>
+#include<stdio.h>
+
+void display()
+{
+ Glfloat vertices[3][2]={{0.0,0.0}, {25.0,50.0},{50.0, 0.0}};
+int i,j,k;
+int rand();
+GLfloat p[2]={7.5, 5.0};
+glClear(GL_COLOR_BUFFER_BIT);
+glBegin(GL_POINTS);
+for(k=0; k<5000; k++)
+{
+  J=rand()%3;
+P[0] =( P[0]+vertices[j][0])/2.0;
+P[1]=(p[1]+vertices[j][1])/2.0;
+glVertex2fv(p);
+}
+glEnd();
+}
+
+
+void myInit()
+{
+glMatrixMode(GL_PROJECTION);
+gluOrtho2D(0.0,50.0,0.0,50.0);
+glLoadIdentity();
+glMatrixMode(GL_MODELVIEW);
+}
+
+void main(int argc,char **argv)
+{
+glutInit(&argc,argv);
+glutInitDisplayMode(GLUT_RGB|GLUT_SINGLE);
+glutInitWindowSize(500,500);
+glutInitWindowPosition(0,0);
+glutCreateWindow("Sierpinski gasket");
+myInit();
+glutDisplayFunc(display);
+glutMainLoop();
+}
