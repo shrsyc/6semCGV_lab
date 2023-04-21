@@ -1,0 +1,54 @@
+#include <GL/glut.h>
+#include <stdio.h>
+#include <math.h>
+
+void display()
+{
+    GLfloat c,c80,x,y,z,theta,thetar;
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3d(0.0,0.0,1.0);
+    c=M_PI/180.0;
+    c80=c*80.0;
+    z=sin(c80);
+    for(theta=-180.0;theta<=180.0;theta+=20.0)
+    {
+        thetar=c*theta;
+        x=sin(thetar)*cos(c80);
+        y=cos(thetar)*cos(c80);
+        glVertex3d(x,y,z);
+    }
+    glEnd();
+    
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3d(0.0,0.0,1.0);
+    z=-sin(c80);
+    for(theta=-180.0;theta<=180.0;theta+=20.0)
+    {
+        thetar=c*theta;
+        x=sin(thetar)*cos(c80);
+        y=cos(thetar)*cos(c80);
+        glVertex3d(x,y,z);
+    }
+    glEnd();
+    glFlush();
+}
+
+void myInit()
+{
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0,500.0,0.0,500.0);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void main(int argc,char **argv)
+{
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_RGB|GLUT_SINGLE);
+    glutInitWindowSize(500,500);
+    glutInitWindowPosition(0,0);
+    glutCreateWindow("square");
+    myInit();
+    glutDisplayFunc(display);
+    glutMainLoop();
+}
