@@ -1,0 +1,50 @@
+#include <GL/glut.h>
+#include <stdio.h>
+#include <math.h>
+
+void display()
+{
+    GLfloat phi,phir,phir20,theta,thetar,x,y,z;
+    GLfloat c=0.0175;
+    for(phi=-80.0;phi<=80.0;phi+=20.0)
+    {
+        phir=c*phi;
+        phir20=c*(phi+20);
+        glBegin(GL_QUAD_STRIP);
+        for(theta=-180.0;theta<=180.0;theta+=20.0)
+        {
+            thetar=c*theta;
+            x=sin(thetar)*cos(phir);
+            y=cos(thetar)*cos(phir);
+            z=sin(phir);
+            glVertex3d(x,y,z);
+            x=sin(thetar)*cos(phir20);
+            y=cos(thetar)*cos(phir20);
+            z=sin(phir20);
+            glVertex3d(x,y,z);
+        }
+        
+    }
+    glEnd();
+    glFlush();
+}
+
+void myInit()
+{
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0,500.0,0.0,500.0);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void main(int argc,char **argv)
+{
+    glutInit(&argc,argv);
+    glutInitDisplayMode(GLUT_RGB|GLUT_SINGLE);
+    glutInitWindowSize(500,500);
+    glutInitWindowPosition(0,0);
+    glutCreateWindow("sphere");
+    myInit();
+    glutDisplayFunc(display);
+    glutMainLoop();
+}
