@@ -1,0 +1,61 @@
+#include <GL/glut.h>
+#include <stdlib.h>
+#include<stdio.h>
+
+GLsizei wh=500, ww=500;
+GLfloat size=3.0;
+
+void myDisplay()
+{
+glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void drawsquare(int x, int y)
+{
+y=wh-y;
+glBegin(GL_POLYGON);
+glVertex2f(x+size, y+size);
+glVertex2f(x-size, y+size);
+glVertex2f(x-size, y-size);
+glVertex2f(x+size, y-size);
+glEnd();
+glFlush();
+}
+ 
+Void mymouse(int btb, int state, int x, int y)
+{
+	if(btn==GLUT_LEFT_BUTTON&&state==GLUT_DOWN)
+	drawsquare();
+             if(btn==GLUT_RIGHT_BUTTON&&state==GLUT_DOWN)
+exit();
+
+
+
+void  myReshape (GLsizei w, GLsizei h)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+gluOrtho2D(0.0, (GLdouble)w, 0.0, (GLdouble)h);	
+	glMatrixMode(GL_MODELVIEW);
+	glViewport(0,0,w,h);
+ww=w;
+wh=h;
+}
+
+
+
+
+int  main(int argc,char **argv)
+{
+	
+	glutInit(&argc,argv);
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+	glutInitWindowSize(500,500);
+	glutCreateWindow("square");
+	glutReshapeFunc(myReshape);
+	glutDisplayFunc(myDisplay);
+             glutMouseFunc(myMouse);
+	glClearColor(1.0,1.0,1.0,1.0);
+	glutMainLoop();
+}
+
